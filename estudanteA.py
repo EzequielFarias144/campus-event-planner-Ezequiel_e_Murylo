@@ -27,3 +27,8 @@ def adicionarEvento(listaEventos, nome, data, local, categoria):
     
     listaEventos.append(evento)
     return f"Parabéns! Você adicionou o evento '{nome}' com sucesso. ID do evento: {evento['id']}."
+
+
+def listarEventos(listaEventos):
+    return listaEventos
+
