@@ -1,4 +1,5 @@
 from datetime import datetime
+import time 
 
 def validarData(dataStr):
     try: 
@@ -76,3 +77,14 @@ def procurarEventoPorNome(listaEventos, nome):
             print(f"\nID: {evento['id']}, \nNome: {evento['nome']}, \nData: {evento['data']}, \nLocal: {evento['local']}, \nCategoria: {evento['categoria']}, \nParticipou: {[evento['participado']]} ")
     else:
         print("Nenhum evento encontrado com esse nome, por favor tente outro.")
+        
+def deletarEvento(listaEvento, id):
+    for evento in listaEvento:
+        if evento['id'] == id:
+            print("Removendo evento, aguarde...")
+            time.sleep(2)
+            listaEventos.remove(evento)
+            print(f"Evento com ID {id} removido com sucesso.")
+        else: 
+            print("ID do evento não encontrado. Por favor, veja se você já removeu ou se escolheu o ID correto.")
+    
