@@ -91,5 +91,8 @@ def deletarEvento(listaEvento, id):
             time.sleep(2)
             listaEvento.remove(evento)
             print(f"Evento com ID {id} removido com sucesso.\n")
-        else:  
-            print("ID do evento não encontrado. Por favor, veja se você já removeu ou se escolheu o ID correto.\n")
+            return 
+
+    print("\nRemovendo evento, aguarde...")
+    time.sleep(2)
+    print("\nID do evento não encontrado. Por favor, veja se você já removeu ou se escolheu o ID correto.\n")
