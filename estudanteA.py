@@ -11,11 +11,13 @@ def validarData(dataStr):
 
 
 
-def adicionarEvento(listaEventos, nome, data, local, categoria):
+def adicionarEvento(listaEventos, nome = "", data = "", local = "", categoria = "", participado = False):
     if not nome.strip() or not data.strip() or not local.strip() or not categoria.strip():
-        return "Estranho! Isso deu erro... Tente preencher todos os campos."
+        print("Estranho! Isso deu erro... Tente preencher todos os campos.\n")
+        return
     if not validarData(data):
-        return "Data inválida! Por favor, insira uma data no formato AAAA-MM-DD ex: 2025-12-15."
+        print("Data inválida! Por favor, insira uma data no formato AAAA-MM-DD e que seja atual ou futura. Ex: 2025-12-15.\n")
+        return
 
     id = max([evento["id"] for evento in listaEventos], default=0) + 1
     
@@ -25,11 +27,11 @@ def adicionarEvento(listaEventos, nome, data, local, categoria):
         "data": data,
         "local": local.strip(),
         "categoria": categoria.strip(),
-        "participado": False
+        "participado": participado
     }
     
     listaEventos.append(evento)
-    print(f"Parabéns! Você adicionou o evento {nome} com sucesso. ID do evento: {evento['id']}.")
+    print(f"Parabéns! Você adicionou o evento {nome} com sucesso. ID do evento: {evento['id']}.\n")
 
 
 def listarEventos(listaEventos):
@@ -72,19 +74,22 @@ def procurarEventoPorNome(listaEventos, nome):
             resultados_da_busca.append(evento)
 
     if resultados_da_busca:
-        print("Encontrei seu evento! Aqui estão os detalhes:")
+        print("\nEncontrei seu evento! Aqui estão os detalhes:")
         for evento in resultados_da_busca:
-            print(f"\nID: {evento['id']}, \nNome: {evento['nome']}, \nData: {evento['data']}, \nLocal: {evento['local']}, \nCategoria: {evento['categoria']}, \nParticipou: {[evento['participado']]} ")
+            print(f"\nID: {evento['id']}, \nNome: {evento['nome']}, \nData: {evento['data']}, \nLocal: {evento['local']}, \nCategoria: {evento['categoria']},")
+            
+            participou = evento['participado']
+            status = "Sim" if participou else "Não"
+            print(f"Participou: {status}\n" )
     else:
-        print("Nenhum evento encontrado com esse nome, por favor tente outro.")
+        print("Nenhum evento encontrado com esse nome, por favor tente outro ou verifique se digitou certo.")
         
 def deletarEvento(listaEvento, id):
     for evento in listaEvento:
         if evento['id'] == id:
             print("Removendo evento, aguarde...")
             time.sleep(2)
-            listaEventos.remove(evento)
-            print(f"Evento com ID {id} removido com sucesso.")
-        else: 
-            print("ID do evento não encontrado. Por favor, veja se você já removeu ou se escolheu o ID correto.")
-    
+            listaEvento.remove(evento)
+            print(f"Evento com ID {id} removido com sucesso.\n")
+        else:  
+            print("ID do evento não encontrado. Por favor, veja se você já removeu ou se escolheu o ID correto.\n")
